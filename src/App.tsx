@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { supabase } from "./lib/supabase";
 
 const weddingDate = new Date("2026-11-12T16:00:00+07:00");
 
@@ -54,6 +55,8 @@ function IllustratedDivider({ src }: { src: string }) {
 function App() {
   const [countdown, setCountdown] = useState(getCountdown);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -115,8 +118,45 @@ function App() {
     void audioRef.current?.play().catch(() => undefined);
   };
 
-  const submitRsvp = (event: FormEvent<HTMLFormElement>) => {
+  const submitRsvp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSubmitError("");
+
+    const formData = new FormData(event.currentTarget);
+    const guestName = String(formData.get("name") ?? "").trim();
+    const attending = formData.get("attending");
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!supabase) {
+      setSubmitError(
+        "Chưa kết nối được hệ thống phản hồi. Vui lòng thử lại sau.",
+      );
+      return;
+    }
+
+    if (!guestName || (attending !== "yes" && attending !== "no")) {
+      setSubmitError("Vui lòng điền tên và chọn khả năng tham dự.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const { error } = await supabase.from("rsvps").insert({
+      guest_name: guestName,
+      attending: attending === "yes",
+      message: message || null,
+    });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      console.error("Unable to save RSVP", error);
+      setSubmitError(
+        "Chưa gửi được phản hồi. Vui lòng kiểm tra kết nối và thử lại.",
+      );
+      return;
+    }
+
     setSubmitted(true);
   };
 
@@ -373,6 +413,8 @@ function App() {
               <span>Họ và tên</span>
               <input
                 name="name"
+                maxLength={120}
+                autoComplete="name"
                 required
               />
             </label>
@@ -392,10 +434,20 @@ function App() {
               <textarea
                 name="message"
                 rows={2}
+                maxLength={1000}
               />
             </label>
-            <button className="ticket-button light-ticket" type="submit">
-              Gửi phản hồi
+            {submitError && (
+              <p className="rsvp-error" role="alert">
+                {submitError}
+              </p>
+            )}
+            <button
+              className="ticket-button light-ticket"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Đang gửi…" : "Gửi phản hồi"}
             </button>
           </form>
         )}

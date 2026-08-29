@@ -170,9 +170,11 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 .rsvp-form legend { width: 100%; margin-bottom: 14px; }
 .rsvp-form fieldset label { font-family: 'Be Vietnam Pro', sans-serif; font-size: .82rem; font-weight: 400; }
 .rsvp-form input[type='radio'] { accent-color: var(--gold-light); }
+.rsvp-error { margin: -6px 0 0; color: #f2c7c0; font-size: .72rem; line-height: 1.6; text-align: center; }
 .light-ticket { justify-self: center; margin-top: 10px; border-color: rgba(234,217,170,.62); color: var(--olive-dark); }
 .light-ticket::before, .light-ticket::after { border-color: rgba(234,217,170,.48); background: var(--olive-dark); }
 .light-ticket:hover { color: var(--red); }
+.light-ticket:disabled { cursor: wait; opacity: .65; }
 .success-card { padding: 55px 30px; border: 1px solid rgba(247,241,231,.26); text-align: center; }
 .success-card > span { color: var(--gold-light); font-size: 2rem; }
 .success-card h3 { margin: 8px 0; font-family: 'Dancing Script', 'Be Vietnam Pro', cursive; font-size: 2.2rem; font-weight: 600; }
