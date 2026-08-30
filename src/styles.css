@@ -24,7 +24,7 @@ a { color: inherit; }
 .invitation-cover.is-open .cover-monogram { animation: monogram-open .62s ease-out both; }
 .invitation-cover.is-open .invitation-cover__inner > p { animation: cover-copy-out .3s ease both; }
 .invitation-cover__inner { position: relative; z-index: 2; display: grid; justify-items: center; width: min(100%, 520px); text-align: center; }
-.invitation-cover__inner > p { position: fixed; z-index: 4; right: 20px; bottom: max(12px, env(safe-area-inset-bottom)); left: 20px; margin: 0; color: var(--olive-dark); font-family: 'Be Vietnam Pro', sans-serif; font-size: clamp(.7rem, 2.5vw, .82rem); font-weight: 500; letter-spacing: .18em; text-align: center; text-transform: uppercase; }
+.invitation-cover__inner > p { position: fixed; z-index: 4; right: 20px; bottom: max(28px, calc(env(safe-area-inset-bottom) + 12px)); left: 20px; margin: 0; color: var(--olive-dark); font-family: 'Be Vietnam Pro', sans-serif; font-size: clamp(.7rem, 2.5vw, .82rem); font-weight: 500; letter-spacing: .18em; text-align: center; text-transform: uppercase; }
 .invitation-cover__inner > span { margin-top: -18px; color: var(--muted); font-size: .58rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
 .cover-hearts { position: relative; display: block; width: min(80vw, 470px); aspect-ratio: 736 / 920; padding: 0; border: 0; background: transparent; cursor: pointer; transition: transform .25s ease; }
 .cover-hearts img { display: block; width: 100%; height: 100%; object-fit: contain; }
