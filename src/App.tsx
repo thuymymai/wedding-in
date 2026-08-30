@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { supabase } from "./lib/supabase";
 
 const weddingDate = new Date("2026-11-12T16:00:00+07:00");
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 function getCountdown() {
   const distance = Math.max(0, weddingDate.getTime() - Date.now());
@@ -21,7 +22,7 @@ const timeline = [
     location:
       "Phòng 2201, Tòa CT2, Chung cư Hyundai Hillstate, Hà Đông, Hà Nội",
     note: "Nghi lễ được cử hành tại tư gia nhà gái.",
-    icon: "/assets/clipart_03.png",
+    icon: asset("assets/clipart_03.png"),
   },
   {
     time: "10:30",
@@ -29,7 +30,7 @@ const timeline = [
     title: "Lễ Thành Hôn",
     location: "Phòng 205, Tòa N4AB, 52 Lê Văn Lương, Yên Hòa, Hà Nội",
     note: "Nghi lễ được cử hành tại tư gia nhà trai.",
-    icon: "/assets/clipart_05.png",
+    icon: asset("assets/clipart_05.png"),
   },
   {
     time: "17:30",
@@ -37,7 +38,7 @@ const timeline = [
     title: "Tiệc Cưới",
     location: "Sảnh 1, 229 Tây Sơn, phường Kim Liên, Hà Nội",
     note: "Hân hạnh đón bạn đến chung vui cùng gia đình chúng mình.",
-    icon: "/assets/clipart_06.png",
+    icon: asset("assets/clipart_06.png"),
     featured: true,
   },
 ];
@@ -208,10 +209,10 @@ function App() {
             onClick={openInvitation}
             aria-label="Mở thiệp cưới của Trang và Kiệt"
           >
-            <img src="/assets/invitation-heart-cover.jpeg" alt="" />
+            <img src={asset("assets/invitation-heart-cover.jpeg")} alt="" />
             <img
               className="cover-monogram"
-              src="/assets/tk-date-monogram-transparent.png"
+              src={asset("assets/tk-date-monogram-transparent.png")}
               alt=""
               aria-hidden="true"
             />
@@ -222,7 +223,7 @@ function App() {
 
       <audio
         ref={audioRef}
-        src="/audio/baby-im-yours.mp3"
+        src={asset("audio/baby-im-yours.mp3")}
         autoPlay
         loop
         playsInline
@@ -253,8 +254,8 @@ function App() {
       <header className="hero" id="home">
         <img
           className="hero-art"
-          src="/assets/DSC07406.jpeg"
-          srcSet="/assets/DSC07406-mobile.jpeg 1200w, /assets/DSC07406.jpeg 4000w"
+          src={asset("assets/DSC07406.jpeg")}
+          srcSet={`${asset("assets/DSC07406-mobile.jpeg")} 1200w, ${asset("assets/DSC07406.jpeg")} 4000w`}
           sizes="100vw"
           alt="Những khoảnh khắc trong câu chuyện của chúng mình"
           fetchPriority="high"
@@ -267,7 +268,7 @@ function App() {
           </h1>
           <p className="hero-note">chính thức về chung một nhà!</p>
           <div className="venue-icon" aria-hidden="true">
-            <img src="/assets/clipart-save-the-date-stamp.png" alt="" />
+            <img src={asset("assets/clipart-save-the-date-stamp.png")} alt="" />
           </div>
           <div className="date-lockup">
             <strong>12 · 11 · 2026</strong>
@@ -283,7 +284,7 @@ function App() {
         <p className="eyebrow" data-reveal="up">
           Từ bạn học đến bạn đời
         </p>
-        <IllustratedDivider src="/assets/clipart-cupids.png" />
+        <IllustratedDivider src={asset("assets/clipart-cupids.png")} />
         <div className="story-grid">
           <div className="story-copy">
             <article className="story-chapter" data-reveal="up">
@@ -301,7 +302,7 @@ function App() {
               aria-hidden="true"
               data-reveal="scale"
             >
-              <img src="/assets/clipart_14.png" alt="" />
+              <img src={asset("assets/clipart_14.png")} alt="" />
             </div>
 
             <article className="story-chapter" data-reveal="up">
@@ -318,7 +319,7 @@ function App() {
               aria-hidden="true"
               data-reveal="scale"
             >
-              <img src="/assets/clipart_25.png" alt="" />
+              <img src={asset("assets/clipart_25.png")} alt="" />
             </div>
 
             <article className="story-chapter" data-reveal="up">
@@ -335,7 +336,7 @@ function App() {
               aria-hidden="true"
               data-reveal="scale"
             >
-              <img src="/assets/clipart_09.png" alt="" />
+              <img src={asset("assets/clipart_09.png")} alt="" />
             </div>
 
             <article className="story-chapter" data-reveal="up">
@@ -350,7 +351,7 @@ function App() {
           </div>
           <figure className="story-card taped" data-reveal="tilt">
             <img
-              src="/assets/DSC07671.jpeg"
+              src={asset("assets/DSC07671.jpeg")}
               alt="Những kỷ niệm được minh họa trong hành trình bên nhau"
               loading="lazy"
             />
@@ -422,21 +423,21 @@ function App() {
           <div className="collage-grid">
             <figure className="collage-photo collage-photo--one">
               <img
-                src="/assets/DSC07158.jpeg"
+                src={asset("assets/DSC07158.jpeg")}
                 alt="Trang và Kiệt cùng bó hoa trên phố"
                 loading="lazy"
               />
             </figure>
             <figure className="collage-photo collage-photo--two">
               <img
-                src="/assets/DSC07256.jpeg"
+                src={asset("assets/DSC07256.jpeg")}
                 alt="Trang và Kiệt bên nhau trong ngày cưới"
                 loading="lazy"
               />
             </figure>
             <figure className="collage-photo collage-photo--three">
               <img
-                src="/assets/DSC07346.jpeg"
+                src={asset("assets/DSC07346.jpeg")}
                 alt="Trang và Kiệt bên nhau dưới hàng cây"
                 loading="lazy"
               />
@@ -497,7 +498,7 @@ function App() {
       </section>
       <section className="paper-section countdown-section">
         <div className="line-couple" aria-hidden="true" data-reveal="scale">
-          <img src="/assets/clipart_24.png" alt="" />
+          <img src={asset("assets/clipart_24.png")} alt="" />
         </div>
         <h2 data-reveal="up">Đếm ngược ngày vui!</h2>
         <div className="countdown" aria-live="polite" data-reveal="up">
@@ -521,7 +522,7 @@ function App() {
       <footer data-reveal="up">
         <img
           className="footer-heart"
-          src="/assets/heart-childhood-composite.png"
+          src={asset("assets/heart-childhood-composite.png")}
           alt="Ảnh tuổi thơ của Trang và Kiệt trong khung trái tim"
         />
         <a href="#home">Trang &amp; Kiệt</a>
