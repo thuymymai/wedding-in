@@ -43,6 +43,22 @@ const timeline = [
   },
 ];
 
+const calendarDescription = [
+  "09:00 - Lễ Vu Quy tại nhà gái",
+  "10:30 - Lễ Thành Hôn tại nhà trai",
+  "17:30 - Tiệc cưới tại Mipec Palace (sự kiện chính)",
+].join("\n");
+
+const googleCalendarUrl =
+  "https://calendar.google.com/calendar/render?" +
+  new URLSearchParams({
+    action: "TEMPLATE",
+    text: "Đám cưới Trang & Kiệt",
+    dates: "20261112T020000Z/20261112T140000Z",
+    details: calendarDescription,
+    location: "Mipec Palace, Sảnh 1, 229 Tây Sơn, Hà Nội",
+  }).toString();
+
 function IllustratedDivider({ src }: { src: string }) {
   return (
     <div className="illustrated-divider" aria-hidden="true" data-reveal="scale">
@@ -423,7 +439,7 @@ function App() {
           <div className="collage-grid">
             <figure className="collage-photo collage-photo--one">
               <img
-                src={asset("assets/DSC07158.jpeg")}
+                src={asset("assets/DSC06941.jpeg")}
                 alt="Trang và Kiệt cùng bó hoa trên phố"
                 loading="lazy"
               />
@@ -439,6 +455,13 @@ function App() {
               <img
                 src={asset("assets/DSC07346.jpeg")}
                 alt="Trang và Kiệt bên nhau dưới hàng cây"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="collage-photo collage-photo--four">
+              <img
+                src={asset("assets/DSC07158.jpeg")}
+                alt="Trang và Kiệt bên nhau trước khung cửa"
                 loading="lazy"
               />
             </figure>
@@ -514,6 +537,32 @@ function App() {
             </div>
           ))}
         </div>
+        <details className="calendar-add calendar-add--countdown-section" data-reveal="up">
+          <summary>
+            <span className="calendar-add__icon" aria-hidden="true">
+              <img
+                src={asset("assets/calendar-handdrawn-transparent.png")}
+                alt=""
+                loading="lazy"
+              />
+            </span>
+            <span>
+              <strong>Thêm ngày cưới vào lịch</strong>
+              <small>12 · 11 · 2026</small>
+            </span>
+          </summary>
+          <div className="calendar-add__options">
+            <a href={googleCalendarUrl} target="_blank" rel="noreferrer">
+              Google Calendar
+            </a>
+            <a
+              href={asset("assets/trang-kiet-wedding.ics")}
+              download="dam-cuoi-trang-kiet.ics"
+            >
+              Apple Calendar / Outlook
+            </a>
+          </div>
+        </details>
         <p className="countdown-note" data-reveal="up">
           Mong sớm được gặp bạn!
         </p>
@@ -522,7 +571,7 @@ function App() {
       <footer data-reveal="up">
         <img
           className="footer-heart"
-          src={asset("assets/heart-childhood-composite.png")}
+          src={asset("assets/heart-childhood-composite-v2.png")}
           alt="Ảnh tuổi thơ của Trang và Kiệt trong khung trái tim"
         />
         <a href="#home">Trang &amp; Kiệt</a>

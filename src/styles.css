@@ -165,16 +165,32 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 .timeline-item.is-featured address a > span:first-child { text-decoration-color: rgba(57,55,45,.32); }
 .timeline-item.is-featured .timeline-time-icon { filter: none; opacity: .82; }
 .timeline-item.is-featured .timeline-content { padding-bottom: 0; }
+.calendar-add { width: min(100%, 430px); margin: 48px auto 0; color: var(--ink); }
+.calendar-add summary { display: flex; align-items: center; gap: 10px; position: relative; padding: 7px 44px 7px 9px; border: 1px solid rgba(108,98,68,.35); border-radius: 3px 5px 3px 6px; background: repeating-linear-gradient(0deg, rgba(112,101,69,.025) 0 1px, transparent 1px 4px), #f5efdf; box-shadow: 0 13px 30px rgba(25,27,14,.22), inset 0 0 0 1px rgba(255,255,255,.48); cursor: pointer; list-style: none; transform: rotate(-.2deg); transition: transform .2s ease, box-shadow .2s ease; }
+.calendar-add summary::-webkit-details-marker { display: none; }
+.calendar-add summary:hover { box-shadow: 0 16px 34px rgba(25,27,14,.28), inset 0 0 0 1px rgba(255,255,255,.55); transform: rotate(0) translateY(-2px); }
+.calendar-add summary:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 4px; }
+.calendar-add summary::after { content: '+'; position: absolute; right: 20px; top: 50%; color: var(--red); font-family: 'Be Vietnam Pro', sans-serif; font-size: 1.4rem; font-weight: 300; transform: translateY(-52%); transition: transform .2s ease; }
+.calendar-add[open] summary::after { transform: translateY(-52%) rotate(45deg); }
+.calendar-add__icon { display: grid; place-items: center; flex: 0 0 54px; width: 54px; height: 54px; }
+.calendar-add__icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.calendar-add summary > span:last-child { display: grid; justify-items: start; gap: 4px; text-align: left; }
+.calendar-add summary strong { font-family: 'Be Vietnam Pro', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.calendar-add summary small { color: var(--red); font-family: 'Cormorant Garamond', 'Be Vietnam Pro', serif; font-size: 1rem; font-weight: 600; letter-spacing: .13em; }
+.calendar-add__options { display: grid; grid-template-columns: 1fr 1.35fr; gap: 7px; padding: 9px 8px 0; }
+.calendar-add__options a { display: grid; place-items: center; min-height: 42px; padding: 9px 12px; border: 1px solid rgba(248,245,237,.34); border-radius: 3px; color: #fffaf2; font-size: .58rem; font-weight: 600; letter-spacing: .08em; line-height: 1.4; text-align: center; text-decoration: none; text-transform: uppercase; transition: background-color .2s ease, color .2s ease; }
+.calendar-add__options a:hover, .calendar-add__options a:focus-visible { background: var(--paper); color: var(--red); outline: none; }
 
 .collage-section { padding: clamp(54px, 8vw, 100px) 0; background: #eee7dc; }
-.photo-collage { position: relative; width: min(72vw, 390px); margin: 0 auto; padding: clamp(13px, 2vw, 18px) clamp(13px, 2vw, 18px) clamp(66px, 9vw, 84px); border: 2px solid var(--red); border-radius: 2px 4px 3px 2px; background: #f7f0e5; box-shadow: 0 18px 44px rgba(79,52,44,.12); transform: rotate(-.25deg); }
-.collage-grid { display: grid; grid-template-columns: 1fr; gap: clamp(12px, 2vw, 18px); }
-.collage-photo { min-width: 0; min-height: 0; aspect-ratio: 1 / 1; margin: 0; padding: 4px; overflow: hidden; border: 1.5px solid var(--red); border-radius: 3px 2px 4px 2px; background: #f7f0e5; }
+.photo-collage { position: relative; width: min(88vw, 640px); margin: 0 auto; padding: clamp(13px, 2vw, 18px) clamp(13px, 2vw, 18px) clamp(66px, 9vw, 84px); border: 2px solid var(--red); border-radius: 2px 4px 3px 2px; background: #f7f0e5; box-shadow: 0 18px 44px rgba(79,52,44,.12); transform: rotate(-.25deg); }
+.collage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(6px, 1.4vw, 12px); }
+.collage-photo { min-width: 0; min-height: 0; aspect-ratio: 4 / 5; margin: 0; padding: 4px; overflow: hidden; border: 1.5px solid var(--red); border-radius: 3px 2px 4px 2px; background: #f7f0e5; }
 .collage-photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(1.03); transition: transform .7s ease; }
 .collage-photo:hover img { transform: scale(1.025); }
 .collage-photo--one img { object-position: 50% 70%; }
 .collage-photo--two img { object-position: 50% 58%; }
 .collage-photo--three img { object-position: 50% 68%; }
+.collage-photo--four img { object-position: 50% 60%; }
 .collage-heart { position: absolute; bottom: clamp(14px, 2vw, 20px); left: 50%; width: clamp(38px, 8vw, 50px); height: clamp(36px, 7vw, 46px); background: url('/assets/heart-transparent.png') center / contain no-repeat; transform: translateX(-50%) rotate(-3deg); }
 
 .countdown-section { min-height: 680px; display: grid; place-content: center; text-align: center; border-top: 1px solid rgba(255,255,255,.16); background: radial-gradient(circle at 50% 18%, rgba(255,255,255,.08), transparent 42%), var(--red); color: var(--paper); }
@@ -183,9 +199,10 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 .line-couple img { display: block; width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(94%) sepia(10%) saturate(420%) hue-rotate(347deg); }
 .countdown-section h2 { font-family: 'Dancing Script', 'Be Vietnam Pro', cursive; font-size: clamp(3rem, 8vw, 5.7rem); font-weight: 600; }
 .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; width: min(100%, 660px); margin: 44px auto 25px; background: rgba(255,255,255,.24); border: 1px solid rgba(255,255,255,.28); }
-.countdown div { padding: 22px 10px; background: rgba(248,245,237,.96); color: var(--ink); }
-.countdown strong { display: block; font-family: 'Cormorant Garamond', 'Be Vietnam Pro', serif; font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 500; }
-.countdown span { color: var(--muted); font-size: .57rem; letter-spacing: .16em; text-transform: uppercase; }
+.countdown > div { padding: 22px 10px; background: rgba(248,245,237,.96); color: var(--ink); }
+.countdown > div strong { display: block; font-family: 'Cormorant Garamond', 'Be Vietnam Pro', serif; font-size: clamp(1.8rem, 5vw, 3.5rem); font-weight: 500; }
+.countdown > div span { color: var(--muted); font-size: .57rem; letter-spacing: .16em; text-transform: uppercase; }
+.countdown-section .calendar-add--countdown-section { margin-top: 0; margin-bottom: 22px; }
 .countdown-note { color: var(--paper); font-size: .3rem; letter-spacing: .16em; }
 
 .rsvp-section { min-height: 780px; }
@@ -291,16 +308,24 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
   .timeline-item address { font-size: .72rem; line-height: 1.52; }
   .timeline-item p { font-size: .76rem; line-height: 1.55; }
   .timeline-item.is-featured { margin: 4px -8px 0; padding: 20px 12px; }
+  .calendar-add { margin-top: 38px; }
+  .calendar-add summary { gap: 9px; padding: 6px 38px 6px 8px; }
+  .calendar-add__icon { flex-basis: 50px; width: 50px; height: 50px; }
+  .calendar-add summary strong { font-size: .62rem; letter-spacing: .08em; }
+  .calendar-add summary small { font-size: .9rem; }
+  .calendar-add summary::after { right: 15px; }
+  .calendar-add__options { grid-template-columns: 1fr; }
   .collage-section { padding: 48px 0; }
-  .photo-collage { width: min(72vw, 330px); }
+  .photo-collage { width: min(88vw, 420px); }
   .collage-grid { gap: 4px; }
   .countdown-section { min-height: 0; padding-top: 20px; padding-bottom: 30px; }
   .line-couple { width: 70px; height: 70px; margin-bottom: 15px; }
   .countdown-section h2 { font-size: clamp(2.55rem, 10.5vw, 3.15rem); line-height: 1.08; }
   .countdown { margin: 31px auto 20px; }
-  .countdown div { padding: 16px 3px; }
-  .countdown strong { font-size: clamp(1.75rem, 9vw, 2.4rem); }
-  .countdown span { font-size: .48rem; letter-spacing: .08em; }
+  .countdown > div { padding: 16px 3px; }
+  .countdown > div strong { font-size: clamp(1.75rem, 9vw, 2.4rem); }
+  .countdown > div span { font-size: .48rem; letter-spacing: .08em; }
+  .countdown-section .calendar-add--countdown-section { margin-top: 0; margin-bottom: 17px; }
   .countdown-note { font-size: .62rem; }
   .rsvp-section { min-height: 0; padding-bottom: 96px; }
   .rsvp-form { gap: 22px; }
