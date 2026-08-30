@@ -44,7 +44,7 @@ const timeline = [
 
 function IllustratedDivider({ src }: { src: string }) {
   return (
-    <div className="illustrated-divider" aria-hidden="true">
+    <div className="illustrated-divider" aria-hidden="true" data-reveal="scale">
       <span />
       <img src={src} alt="" />
       <span />
@@ -70,6 +70,39 @@ function App() {
     document.body.classList.toggle("cover-locked", !isInvitationOpen);
     return () => document.body.classList.remove("cover-locked");
   }, [isInvitationOpen]);
+
+  useEffect(() => {
+    if (!isInvitationOpen) return;
+
+    const revealItems = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: "0px 0px -7% 0px" },
+    );
+
+    revealItems.forEach((item) => {
+      if (!item.classList.contains("is-visible")) observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, [isInvitationOpen, submitted]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -161,7 +194,9 @@ function App() {
   };
 
   return (
-    <main className="invitation">
+    <main
+      className={`invitation${isInvitationOpen ? " invitation--open" : ""}`}
+    >
       <section
         className={`invitation-cover${isInvitationOpen ? " is-open" : ""}`}
         aria-hidden={isInvitationOpen}
@@ -174,9 +209,12 @@ function App() {
             aria-label="Mở thiệp cưới của Trang và Kiệt"
           >
             <img src="/assets/invitation-heart-cover.jpeg" alt="" />
-            <span className="cover-monogram" aria-hidden="true">
-              T &amp; K
-            </span>
+            <img
+              className="cover-monogram"
+              src="/assets/tk-date-monogram-transparent.png"
+              alt=""
+              aria-hidden="true"
+            />
           </button>
           <p>Chạm vào trái tim để mở</p>
         </div>
@@ -242,11 +280,13 @@ function App() {
       </header>
 
       <section className="paper-section welcome" id="story">
-        <p className="eyebrow">Từ bạn học đến bạn đời</p>
+        <p className="eyebrow" data-reveal="up">
+          Từ bạn học đến bạn đời
+        </p>
         <IllustratedDivider src="/assets/clipart-cupids.png" />
         <div className="story-grid">
           <div className="story-copy">
-            <article className="story-chapter">
+            <article className="story-chapter" data-reveal="up">
               <span>Hà Nội · Những năm cấp 2</span>
               <h3>Ngày đầu ở Marie Curie</h3>
               <p>
@@ -256,11 +296,15 @@ function App() {
               </p>
             </article>
 
-            <div className="story-interlude" aria-hidden="true">
+            <div
+              className="story-interlude"
+              aria-hidden="true"
+              data-reveal="scale"
+            >
               <img src="/assets/clipart_14.png" alt="" />
             </div>
 
-            <article className="story-chapter">
+            <article className="story-chapter" data-reveal="up">
               <span>Verona · Ngày gặp lại</span>
               <h3>Một chương mới</h3>
               <p>
@@ -269,24 +313,32 @@ function App() {
               </p>
             </article>
 
-            <div className="story-interlude" aria-hidden="true">
+            <div
+              className="story-interlude"
+              aria-hidden="true"
+              data-reveal="scale"
+            >
               <img src="/assets/clipart_25.png" alt="" />
             </div>
 
-            <article className="story-chapter">
+            <article className="story-chapter" data-reveal="up">
               <span>Pháp - Ý · Những ngày yêu xa</span>
               <h3>Luôn chọn nhau</h3>
               <p>
-                Dù anh ở Pháp, em ở Ý, chúng mình vẫn luôn vì nhau mà cố gắng
-                để rồi cuối cùng có thể về chung một nhà.
+                Dù anh ở Pháp, em ở Ý, chúng mình vẫn luôn vì nhau mà cố gắng để
+                rồi cuối cùng có thể về chung một nhà.
               </p>
             </article>
 
-            <div className="story-interlude story-interlude--floral" aria-hidden="true">
+            <div
+              className="story-interlude story-interlude--floral"
+              aria-hidden="true"
+              data-reveal="scale"
+            >
               <img src="/assets/clipart_09.png" alt="" />
             </div>
 
-            <article className="story-chapter">
+            <article className="story-chapter" data-reveal="up">
               <span>Hà Nội · 12 tháng 11 năm 2026</span>
               <h3>Điểm đến là mãi mãi</h3>
               <p>
@@ -294,26 +346,23 @@ function App() {
                 lãng mạn, mà còn là sự kiên nhẫn, thấu hiểu và cùng nhau vượt
                 qua mọi thử thách.
               </p>
-              
             </article>
           </div>
-          <figure className="story-card taped">
+          <figure className="story-card taped" data-reveal="tilt">
             <img
               src="/assets/DSC07671.jpeg"
               alt="Những kỷ niệm được minh họa trong hành trình bên nhau"
               loading="lazy"
             />
           </figure>
-          <p className="story-closing">
-                Và chúng mình mong có bạn ở khoảnh khắc bắt đầu ấy.
-              </p>
+          <p className="story-closing" data-reveal="up">
+            Và chúng mình mong có bạn ở khoảnh khắc bắt đầu ấy.
+          </p>
         </div>
       </section>
 
-      
-
       <section className="ink-section">
-        <div className="section-heading light">
+        <div className="section-heading light" data-reveal="up">
           <span className="script-mark">Lịch trình</span>
           <h2>Ngày Hạnh Phúc</h2>
           <p>
@@ -326,6 +375,8 @@ function App() {
             <article
               className={`timeline-item${item.featured ? " is-featured" : ""}`}
               key={`${item.place}-${item.time}`}
+              data-reveal={index % 2 === 0 ? "left" : "right"}
+              style={{ transitionDelay: `${index * 90}ms` }}
             >
               <div className="timeline-time">
                 <strong>{item.time}</strong>
@@ -343,9 +394,7 @@ function App() {
               <div className="timeline-content">
                 <div className="timeline-place-row">
                   <span className="timeline-place">{item.place}</span>
-                  {item.featured && (
-                    <span className="timeline-featured">Sự kiện chính</span>
-                  )}
+                  {item.featured}
                 </div>
                 <h3>{item.title}</h3>
                 <address>
@@ -365,8 +414,11 @@ function App() {
         </div>
       </section>
 
-      <section className="paper-section collage-section" aria-label="Khoảnh khắc của Trang và Kiệt">
-        <div className="photo-collage">
+      <section
+        className="paper-section collage-section"
+        aria-label="Khoảnh khắc của Trang và Kiệt"
+      >
+        <div className="photo-collage" data-reveal="scale">
           <div className="collage-grid">
             <figure className="collage-photo collage-photo--one">
               <img
@@ -393,13 +445,13 @@ function App() {
           <span className="collage-heart" aria-hidden="true" />
         </div>
       </section>
-<section className="ink-section rsvp-section" id="rsvp">
-        <div className="section-heading light">
+      <section className="ink-section rsvp-section" id="rsvp">
+        <div className="section-heading light" data-reveal="up">
           <span className="script-mark">Mời bạn</span>
           <h2>Đến Chung Vui</h2>
         </div>
         {submitted ? (
-          <div className="success-card">
+          <div className="success-card" data-reveal="scale">
             <span>♥</span>
             <h3>Chúng mình đã nhận được phản hồi!</h3>
             <p>Cảm ơn bạn. Hẹn gặp nhau trong ngày vui nhé!</p>
@@ -408,15 +460,10 @@ function App() {
             </button>
           </div>
         ) : (
-          <form className="rsvp-form" onSubmit={submitRsvp}>
+          <form className="rsvp-form" onSubmit={submitRsvp} data-reveal="up">
             <label>
               <span>Họ và tên</span>
-              <input
-                name="name"
-                maxLength={120}
-                autoComplete="name"
-                required
-              />
+              <input name="name" maxLength={120} autoComplete="name" required />
             </label>
             <fieldset>
               <legend>Bạn sẽ đến chung vui chứ?</legend>
@@ -431,11 +478,7 @@ function App() {
             </fieldset>
             <label>
               <span>Lời nhắn gửi</span>
-              <textarea
-                name="message"
-                rows={2}
-                maxLength={1000}
-              />
+              <textarea name="message" rows={2} maxLength={1000} />
             </label>
             {submitError && (
               <p className="rsvp-error" role="alert">
@@ -453,11 +496,11 @@ function App() {
         )}
       </section>
       <section className="paper-section countdown-section">
-        <div className="line-couple" aria-hidden="true">
+        <div className="line-couple" aria-hidden="true" data-reveal="scale">
           <img src="/assets/clipart_24.png" alt="" />
         </div>
-        <h2>Đếm ngược ngày vui!</h2>
-        <div className="countdown" aria-live="polite">
+        <h2 data-reveal="up">Đếm ngược ngày vui!</h2>
+        <div className="countdown" aria-live="polite" data-reveal="up">
           {[
             ["Ngày", countdown.days],
             ["Giờ", countdown.hours],
@@ -470,12 +513,12 @@ function App() {
             </div>
           ))}
         </div>
-        <p className="countdown-note">Mong sớm được gặp bạn!</p>
+        <p className="countdown-note" data-reveal="up">
+          Mong sớm được gặp bạn!
+        </p>
       </section>
 
-      
-
-      <footer>
+      <footer data-reveal="up">
         <img
           className="footer-heart"
           src="/assets/heart-childhood-composite.png"
