@@ -20,7 +20,7 @@ const timeline = [
     place: "Nhà gái",
     title: "Lễ Vu Quy",
     location:
-      "Phòng 2201, Tòa CT2, Chung cư Hyundai Hillstate, Hà Đông, Hà Nội",
+      "Phòng 2201, Tòa CT2, Chung cư Hyundai Hillstate, phường Hà Đông, Hà Nội",
     note: "Nghi lễ được cử hành tại tư gia nhà gái.",
     icon: asset("assets/clipart_03.png"),
   },
@@ -28,7 +28,7 @@ const timeline = [
     time: "10:30",
     place: "Nhà trai",
     title: "Lễ Thành Hôn",
-    location: "Phòng 205, Tòa N4AB, 52 Lê Văn Lương, Yên Hòa, Hà Nội",
+    location: "Phòng 205, Tòa N4AB, 52 Lê Văn Lương, phường Yên Hòa, Hà Nội",
     note: "Nghi lễ được cử hành tại tư gia nhà trai.",
     icon: asset("assets/clipart_05.png"),
   },
@@ -37,7 +37,7 @@ const timeline = [
     place: "Mipec Palace",
     title: "Tiệc Cưới",
     location: "Sảnh 1, 229 Tây Sơn, phường Kim Liên, Hà Nội",
-    note: "Hân hạnh đón bạn đến chung vui cùng gia đình chúng mình.",
+    note: "Gia đình chúng mình hân hạnh được đón tiếp.",
     icon: asset("assets/clipart_06.png"),
     featured: true,
   },
@@ -163,7 +163,7 @@ function App() {
     }
   };
 
-  const openInvitation = () => {
+  const startInvitationOpening = () => {
     setIsInvitationOpen(true);
     void audioRef.current?.play().catch(() => undefined);
   };
@@ -219,21 +219,38 @@ function App() {
         aria-hidden={isInvitationOpen}
       >
         <div className="invitation-cover__inner">
-          <button
-            className="cover-hearts"
-            type="button"
-            onClick={openInvitation}
-            aria-label="Mở thiệp cưới của Trang và Kiệt"
-          >
-            <img src={asset("assets/invitation-heart-cover.jpeg")} alt="" />
-            <img
-              className="cover-monogram"
-              src={asset("assets/tk-date-monogram-transparent.png")}
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-          <p>Chạm vào trái tim để mở</p>
+          <div className="cover-experience">
+            <div className="cover-signature" aria-hidden="true">
+              <img
+                src={asset("assets/tk-date-monogram-transparent.png")}
+                alt=""
+              />
+            </div>
+
+            <div className="photobooth" aria-hidden="true">
+              <div className="photobooth-window">
+                <div className="photo-strip">
+                  <figure>
+                    <img src={asset("assets/DSC07335.jpeg")} alt="" />
+                  </figure>
+                  <figure>
+                    <img src={asset("assets/DSC07158.jpeg")} alt="" />
+                  </figure>
+                  <figure>
+                    <img src={asset("assets/DSC07346.jpeg")} alt="" />
+                  </figure>
+                </div>
+              </div>
+            </div>
+
+            <button
+              className="cover-open-button"
+              type="button"
+              onClick={startInvitationOpening}
+            >
+              Chạm để mở thiệp mời
+            </button>
+          </div>
         </div>
       </section>
 
@@ -278,11 +295,14 @@ function App() {
         />
         <div className="hero-wash" />
         <div className="hero-copy">
-          <p className="save-the-date">Save the date</p>
+          <p className="save-the-date">Nhà có Hỷ</p>
           <h1>
             Trang <i>&amp;</i> Kiệt
           </h1>
-          <p className="hero-note">chính thức về chung một nhà!</p>
+          <p className="hero-note">
+            trân trọng kính mời Quý khách tới chung vui trong lễ cưới của chúng
+            mình
+          </p>
           <div className="venue-icon" aria-hidden="true">
             <img src={asset("assets/clipart-save-the-date-stamp.png")} alt="" />
           </div>
@@ -304,12 +324,12 @@ function App() {
         <div className="story-grid">
           <div className="story-copy">
             <article className="story-chapter" data-reveal="up">
-              <span>Hà Nội · Những năm cấp 2</span>
-              <h3>Ngày đầu ở Marie Curie</h3>
+              <span>Hà Nội · Việt Nam</span>
+              <h3>Những năm cấp 2</h3>
               <p>
-                Chúng mình gặp nhau và làm bạn từ thời cấp 2 ở Marie Curie. Khi
-                ấy, chẳng ai nghĩ rằng sau này hai đứa lại có thể trở thành một
-                phần quan trọng trong cuộc đời của nhau.
+                Chúng mình biết nhau từ những năm học ở trường THCS Marie Curie.
+                Khi ấy chỉ là hai người cùng trường — chẳng ai nghĩ nhiều năm
+                sau câu chuyện sẽ tiếp tục.
               </p>
             </article>
 
@@ -322,11 +342,12 @@ function App() {
             </div>
 
             <article className="story-chapter" data-reveal="up">
-              <span>Verona · Ngày gặp lại</span>
-              <h3>Một chương mới</h3>
+              <span>Verona · Ý</span>
+              <h3>Ngày gặp lại</h3>
               <p>
-                Sau nhiều năm, chúng mình gặp lại ở Verona. Cuộc gặp ấy dường
-                như mở ra một chương hoàn toàn mới.
+                Nhiều năm sau, chúng mình bắt đầu nói chuyện lại khi một người ở
+                Ý, một người ở Pháp. Từ chuyến đi Ý lần đầu của Kiệt, mọi thứ
+                bắt đầu khác đi.
               </p>
             </article>
 
@@ -339,11 +360,13 @@ function App() {
             </div>
 
             <article className="story-chapter" data-reveal="up">
-              <span>Pháp - Ý · Những ngày yêu xa</span>
-              <h3>Luôn chọn nhau</h3>
+              <span>Pháp - Ý</span>
+              <h3>Những ngày yêu xa</h3>
               <p>
-                Dù anh ở Pháp, em ở Ý, chúng mình vẫn luôn vì nhau mà cố gắng để
-                rồi cuối cùng có thể về chung một nhà.
+                Pháp và Ý không quá xa, nhưng cũng chẳng phải gần. Những ngày
+                yêu xa có những lúc không dễ dàng, nhưng cũng có rất nhiều
+                chuyến bay đi rồi về, những lần gặp nhau ở những thành phố khác
+                nhau, và những kỷ niệm đáng nhớ.
               </p>
             </article>
 
@@ -356,12 +379,13 @@ function App() {
             </div>
 
             <article className="story-chapter" data-reveal="up">
-              <span>Hà Nội · 12 tháng 11 năm 2026</span>
-              <h3>Điểm đến là mãi mãi</h3>
+              <span>Hà Nội · Việt Nam</span>
+              <h3>Và rồi, Hà Nội, 12 tháng 11 năm 2026</h3>
               <p>
-                Chúng mình biết rằng tình yêu không chỉ là những khoảnh khắc
-                lãng mạn, mà còn là sự kiên nhẫn, thấu hiểu và cùng nhau vượt
-                qua mọi thử thách.
+                Từ trường cấp 2 đến Verona, từ những ngày ở hai nơi đến những
+                chuyến bay đi về giữa Pháp và Ý, chúng mình đã cùng nhau đi qua
+                một chặng đường dài. Và lần này, chúng mình trở về Hà Nội —
+                không chỉ là một chuyến đi, mà còn vì một ngày thật đặc biệt.
               </p>
             </article>
           </div>
@@ -373,7 +397,8 @@ function App() {
             />
           </figure>
           <p className="story-closing" data-reveal="up">
-            Và chúng mình mong có bạn ở khoảnh khắc bắt đầu ấy.
+            Chúng mình rất mong có sự hiện diện của những người thân thiết nhất
+            trong khoảnh khắc bắt đầu ấy!
           </p>
         </div>
       </section>
@@ -383,8 +408,8 @@ function App() {
           <span className="script-mark">Lịch trình</span>
           <h2>Ngày Hạnh Phúc</h2>
           <p>
-            Cảm ơn các bạn đã trở thành một phần quan trọng trong ngày đặc biệt
-            này.
+            Cảm ơn mọi người đã trở thành một phần quan trọng trong ngày đặc
+            biệt này.
           </p>
         </div>
         <div className="timeline">
@@ -453,14 +478,14 @@ function App() {
             </figure>
             <figure className="collage-photo collage-photo--three">
               <img
-                src={asset("assets/DSC07346.jpeg")}
+                src={asset("assets/DSC07371.jpeg")}
                 alt="Trang và Kiệt bên nhau dưới hàng cây"
                 loading="lazy"
               />
             </figure>
             <figure className="collage-photo collage-photo--four">
               <img
-                src={asset("assets/DSC07158.jpeg")}
+                src={asset("assets/DSC07705.jpeg")}
                 alt="Trang và Kiệt bên nhau trước khung cửa"
                 loading="lazy"
               />
@@ -471,8 +496,14 @@ function App() {
       </section>
       <section className="ink-section rsvp-section" id="rsvp">
         <div className="section-heading light" data-reveal="up">
-          <span className="script-mark">Mời bạn</span>
+          <span className="script-mark">Thân mời</span>
           <h2>Đến Chung Vui</h2>
+          <p>
+            Chúng mình rất mong được đón tiếp mọi khách mời chỉn chu nhất trong
+            ngày đặc biệt ấy. Nếu bạn có thể sắp xếp tham dự, hãy cho chúng mình
+            biết trước ngày 15/10 nhé để mọi thứ được chuẩn bị thật chu đáo cho
+            buổi gặp gỡ đáng nhớ này.
+          </p>
         </div>
         {submitted ? (
           <div className="success-card" data-reveal="scale">
@@ -490,7 +521,7 @@ function App() {
               <input name="name" maxLength={120} autoComplete="name" required />
             </label>
             <fieldset>
-              <legend>Bạn sẽ đến chung vui chứ?</legend>
+              <legend>Xác nhận khách mời</legend>
               <label>
                 <input type="radio" name="attending" value="yes" required />{" "}
                 Mình sẽ tham dự
@@ -537,7 +568,10 @@ function App() {
             </div>
           ))}
         </div>
-        <details className="calendar-add calendar-add--countdown-section" data-reveal="up">
+        <details
+          className="calendar-add calendar-add--countdown-section"
+          data-reveal="up"
+        >
           <summary>
             <span className="calendar-add__icon" aria-hidden="true">
               <img
@@ -564,7 +598,7 @@ function App() {
           </div>
         </details>
         <p className="countdown-note" data-reveal="up">
-          Mong sớm được gặp bạn!
+          Chúng mình rất mong được gặp lại và đón tiếp mọi người!
         </p>
       </section>
 
