@@ -227,21 +227,11 @@ function App() {
               />
             </div>
 
-            <div className="photobooth" aria-hidden="true">
-              <div className="photobooth-window">
-                <div className="photo-strip">
-                  <figure>
-                    <img src={asset("assets/DSC07335.jpeg")} alt="" />
-                  </figure>
-                  <figure>
-                    <img src={asset("assets/DSC07158.jpeg")} alt="" />
-                  </figure>
-                  <figure>
-                    <img src={asset("assets/DSC07346.jpeg")} alt="" />
-                  </figure>
-                </div>
-              </div>
-            </div>
+            <img
+              className="cover-childhood-collage"
+              src={asset("assets/opening.png")}
+              alt="Trang và Kiệt thuở nhỏ trong tranh cưới cùng chú chó"
+            />
 
             <button
               className="cover-open-button"
@@ -299,10 +289,7 @@ function App() {
           <h1>
             Trang <i>&amp;</i> Kiệt
           </h1>
-          <p className="hero-note">
-            trân trọng kính mời Quý khách tới chung vui trong lễ cưới của chúng
-            mình
-          </p>
+          <p className="hero-note">về chung một nhà</p>
           <div className="venue-icon" aria-hidden="true">
             <img src={asset("assets/clipart-save-the-date-stamp.png")} alt="" />
           </div>
@@ -316,6 +303,88 @@ function App() {
         </span>
       </header>
 
+      <section
+        className="invitation-message-section"
+        aria-label="Lời mời từ Trang và Kiệt"
+      >
+        <div className="invitation-message-frame" data-reveal="scale">
+          <div className="invitation-message-copy">
+            <h2 className="invitation-message-title">Lời Mời</h2>
+            <p>
+              Sau quãng thời gian cùng nhau trưởng thành, cùng đi qua những ngày
+              vui vẻ, những thử thách và cả những điều bình dị nhất của cuộc
+              sống, chúng mình quyết định sẽ nắm tay nhau bước sang một chặng
+              đường mới — hành trình của hôn nhân và xây dựng gia đình nhỏ.
+            </p>
+
+            <img
+              className="invitation-message-ornament"
+              src={asset("assets/clipart_24.png")}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <p>
+              Trong niềm hạnh phúc đặc biệt ấy, chúng mình xin được gửi lời mời
+              thân thương và trân trọng nhất đến gia đình, họ hàng, cô chú, anh
+              chị em, bạn bè, đồng nghiệp cùng tất cả những người yêu quý dành
+              chút thời gian đến chung vui cùng chúng mình trong ngày trọng đại.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="ink-section">
+        <div className="section-heading light" data-reveal="up">
+          <span className="script-mark">Lịch trình</span>
+          <h2>Ngày Hạnh Phúc</h2>
+          <p>
+            Cảm ơn mọi người đã trở thành một phần quan trọng trong ngày đặc
+            biệt này.
+          </p>
+        </div>
+        <div className="timeline">
+          {timeline.map((item, index) => (
+            <article
+              className={`timeline-item${item.featured ? " is-featured" : ""}`}
+              key={`${item.place}-${item.time}`}
+              data-reveal={index % 2 === 0 ? "left" : "right"}
+              style={{ transitionDelay: `${index * 90}ms` }}
+            >
+              <div className="timeline-time">
+                <strong>{item.time}</strong>
+                <span>12 · 11 · 2026</span>
+                {/* <img
+                  className="timeline-time-icon"
+                  src={item.icon}
+                  alt=""
+                  aria-hidden="true"
+                /> */}
+              </div>
+              <div className="timeline-marker">
+                <i>{index + 1}</i>
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-place-row">
+                  <span className="timeline-place">{item.place}</span>
+                  {item.featured}
+                </div>
+                <h3>{item.title}</h3>
+                <address>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Mở ${item.place} trên Google Maps`}
+                  >
+                    <span>{item.location}</span>
+                  </a>
+                </address>
+                <p>{item.note}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
       <section className="paper-section welcome" id="story">
         <p className="eyebrow" data-reveal="up">
           Từ bạn học đến bạn đời
@@ -403,97 +472,7 @@ function App() {
         </div>
       </section>
 
-      <section className="ink-section">
-        <div className="section-heading light" data-reveal="up">
-          <span className="script-mark">Lịch trình</span>
-          <h2>Ngày Hạnh Phúc</h2>
-          <p>
-            Cảm ơn mọi người đã trở thành một phần quan trọng trong ngày đặc
-            biệt này.
-          </p>
-        </div>
-        <div className="timeline">
-          {timeline.map((item, index) => (
-            <article
-              className={`timeline-item${item.featured ? " is-featured" : ""}`}
-              key={`${item.place}-${item.time}`}
-              data-reveal={index % 2 === 0 ? "left" : "right"}
-              style={{ transitionDelay: `${index * 90}ms` }}
-            >
-              <div className="timeline-time">
-                <strong>{item.time}</strong>
-                <span>12 · 11 · 2026</span>
-                {/* <img
-                  className="timeline-time-icon"
-                  src={item.icon}
-                  alt=""
-                  aria-hidden="true"
-                /> */}
-              </div>
-              <div className="timeline-marker">
-                <i>{index + 1}</i>
-              </div>
-              <div className="timeline-content">
-                <div className="timeline-place-row">
-                  <span className="timeline-place">{item.place}</span>
-                  {item.featured}
-                </div>
-                <h3>{item.title}</h3>
-                <address>
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.location)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Mở ${item.place} trên Google Maps`}
-                  >
-                    <span>{item.location}</span>
-                  </a>
-                </address>
-                <p>{item.note}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        className="paper-section collage-section"
-        aria-label="Khoảnh khắc của Trang và Kiệt"
-      >
-        <div className="photo-collage" data-reveal="scale">
-          <div className="collage-grid">
-            <figure className="collage-photo collage-photo--one">
-              <img
-                src={asset("assets/DSC06941.jpeg")}
-                alt="Trang và Kiệt cùng bó hoa trên phố"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--two">
-              <img
-                src={asset("assets/DSC07256.jpeg")}
-                alt="Trang và Kiệt bên nhau trong ngày cưới"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--three">
-              <img
-                src={asset("assets/DSC07371.jpeg")}
-                alt="Trang và Kiệt bên nhau dưới hàng cây"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--four">
-              <img
-                src={asset("assets/DSC07705.jpeg")}
-                alt="Trang và Kiệt bên nhau trước khung cửa"
-                loading="lazy"
-              />
-            </figure>
-          </div>
-          <span className="collage-heart" aria-hidden="true" />
-        </div>
-      </section>
+      
       <section className="ink-section rsvp-section" id="rsvp">
         <div className="section-heading light" data-reveal="up">
           <span className="script-mark">Thân mời</span>
@@ -549,6 +528,44 @@ function App() {
             </button>
           </form>
         )}
+      </section>
+      <section
+        className="paper-section collage-section"
+        aria-label="Khoảnh khắc của Trang và Kiệt"
+      >
+        <div className="photo-collage" data-reveal="scale">
+          <div className="collage-grid">
+            <figure className="collage-photo collage-photo--one">
+              <img
+                src={asset("assets/DSC07158.jpeg")}
+                alt="Trang và Kiệt cùng bó hoa trên phố"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="collage-photo collage-photo--two">
+              <img
+                src={asset("assets/DSC07256.jpeg")}
+                alt="Trang và Kiệt bên nhau trong ngày cưới"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="collage-photo collage-photo--three">
+              <img
+                src={asset("assets/DSC07346.jpeg")}
+                alt="Trang và Kiệt bên nhau dưới hàng cây"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="collage-photo collage-photo--four">
+              <img
+                src={asset("assets/DSC07705.jpeg")}
+                alt="Trang và Kiệt bên nhau trước khung cửa"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+          <span className="collage-heart" aria-hidden="true" />
+        </div>
       </section>
       <section className="paper-section countdown-section">
         <div className="line-couple" aria-hidden="true" data-reveal="scale">
