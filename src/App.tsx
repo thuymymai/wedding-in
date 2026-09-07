@@ -59,6 +59,49 @@ const googleCalendarUrl =
     location: "Mipec Palace, Sảnh 1, 229 Tây Sơn, Hà Nội",
   }).toString();
 
+const carouselPhotos = [
+  {
+    src: asset("assets/DSC07158.jpeg"),
+    alt: "Trang và Kiệt cùng bó hoa trên phố",
+    position: "50% 70%",
+  },
+  {
+    src: asset("assets/DSC07256.jpeg"),
+    alt: "Trang và Kiệt bên nhau trong ngày cưới",
+    position: "50% 58%",
+  },
+  {
+    src: asset("assets/DSC07346.jpeg"),
+    alt: "Trang và Kiệt bên nhau dưới hàng cây",
+    position: "50% 68%",
+  },
+  {
+    src: asset("assets/DSC07705.jpeg"),
+    alt: "Trang và Kiệt bên nhau trước khung cửa",
+    position: "50% 60%",
+  },
+  {
+    src: asset("assets/DSC06941.jpeg"),
+    alt: "Kiệt hôn Trang trước khung cửa cổ",
+    position: "50% 64%",
+  },
+  {
+    src: asset("assets/DSC07371.jpeg"),
+    alt: "Trang và Kiệt trong khoảnh khắc vui bên bờ sông",
+    position: "50% 68%",
+  },
+  {
+    src: asset("assets/DSC07457.jpeg"),
+    alt: "Trang nhìn Kiệt giữa khung cảnh Paris",
+    position: "50% 58%",
+  },
+  {
+    src: asset("assets/DSC07486.jpeg"),
+    alt: "Trang và Kiệt nắm tay nhau trong ánh chiều",
+    position: "50% 68%",
+  },
+];
+
 function IllustratedDivider({ src }: { src: string }) {
   return (
     <div className="illustrated-divider" aria-hidden="true" data-reveal="scale">
@@ -74,9 +117,12 @@ function App() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [attendance, setAttendance] = useState<"yes" | "no" | "">("");
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
+  const [activePhoto, setActivePhoto] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const carouselTouchStartRef = useRef<number | null>(null);
 
   useEffect(() => {
     const timer = window.setInterval(() => setCountdown(getCountdown()), 1_000);
@@ -168,6 +214,17 @@ function App() {
     void audioRef.current?.play().catch(() => undefined);
   };
 
+  const showPreviousPhoto = () => {
+    setActivePhoto(
+      (current) =>
+        (current - 1 + carouselPhotos.length) % carouselPhotos.length,
+    );
+  };
+
+  const showNextPhoto = () => {
+    setActivePhoto((current) => (current + 1) % carouselPhotos.length);
+  };
+
   const submitRsvp = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitError("");
@@ -175,6 +232,8 @@ function App() {
     const formData = new FormData(event.currentTarget);
     const guestName = String(formData.get("name") ?? "").trim();
     const attending = formData.get("attending");
+    const guestCount =
+      attending === "yes" ? Number(formData.get("guest_count") ?? 0) : 0;
     const message = String(formData.get("message") ?? "").trim();
 
     if (!supabase) {
@@ -189,11 +248,17 @@ function App() {
       return;
     }
 
+    if (!Number.isInteger(guestCount) || guestCount < 0 || guestCount > 20) {
+      setSubmitError("Vui lòng nhập số khách đi kèm từ 0 đến 20.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const { error } = await supabase.from("rsvps").insert({
       guest_name: guestName,
       attending: attending === "yes",
+      guest_count: guestCount,
       message: message || null,
     });
 
@@ -229,7 +294,7 @@ function App() {
 
             <img
               className="cover-childhood-collage"
-              src={asset("assets/opening.png")}
+              src={asset("assets/opening2.png")}
               alt="Trang và Kiệt thuở nhỏ trong tranh cưới cùng chú chó"
             />
 
@@ -472,7 +537,6 @@ function App() {
         </div>
       </section>
 
-      
       <section className="ink-section rsvp-section" id="rsvp">
         <div className="section-heading light" data-reveal="up">
           <span className="script-mark">Thân mời</span>
@@ -502,14 +566,43 @@ function App() {
             <fieldset>
               <legend>Xác nhận khách mời</legend>
               <label>
-                <input type="radio" name="attending" value="yes" required />{" "}
+                <input
+                  type="radio"
+                  name="attending"
+                  value="yes"
+                  required
+                  checked={attendance === "yes"}
+                  onChange={() => setAttendance("yes")}
+                />{" "}
                 Mình sẽ tham dự
               </label>
               <label>
-                <input type="radio" name="attending" value="no" /> Rất tiếc,
-                mình không thể đến
+                <input
+                  type="radio"
+                  name="attending"
+                  value="no"
+                  checked={attendance === "no"}
+                  onChange={() => setAttendance("no")}
+                />{" "}
+                Rất tiếc, mình không thể đến
               </label>
             </fieldset>
+            {attendance === "yes" && (
+              <label className="rsvp-guest-count">
+                <span>Số khách đi kèm</span>
+                <input
+                  type="number"
+                  name="guest_count"
+                  min={0}
+                  max={20}
+                  step={1}
+                  defaultValue={0}
+                  inputMode="numeric"
+                  required
+                />
+                <small>Không tính chính bạn</small>
+              </label>
+            )}
             <label>
               <span>Lời nhắn gửi</span>
               <textarea name="message" rows={2} maxLength={1000} />
@@ -533,38 +626,77 @@ function App() {
         className="paper-section collage-section"
         aria-label="Khoảnh khắc của Trang và Kiệt"
       >
-        <div className="photo-collage" data-reveal="scale">
-          <div className="collage-grid">
-            <figure className="collage-photo collage-photo--one">
-              <img
-                src={asset("assets/DSC07158.jpeg")}
-                alt="Trang và Kiệt cùng bó hoa trên phố"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--two">
-              <img
-                src={asset("assets/DSC07256.jpeg")}
-                alt="Trang và Kiệt bên nhau trong ngày cưới"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--three">
-              <img
-                src={asset("assets/DSC07346.jpeg")}
-                alt="Trang và Kiệt bên nhau dưới hàng cây"
-                loading="lazy"
-              />
-            </figure>
-            <figure className="collage-photo collage-photo--four">
-              <img
-                src={asset("assets/DSC07705.jpeg")}
-                alt="Trang và Kiệt bên nhau trước khung cửa"
-                loading="lazy"
-              />
-            </figure>
+        <div
+          className="photo-carousel"
+          data-reveal="scale"
+          onTouchStart={(event) => {
+            carouselTouchStartRef.current = event.changedTouches[0].clientX;
+          }}
+          onTouchEnd={(event) => {
+            const start = carouselTouchStartRef.current;
+            carouselTouchStartRef.current = null;
+            if (start === null) return;
+
+            const distance = event.changedTouches[0].clientX - start;
+            if (Math.abs(distance) < 42) return;
+            if (distance > 0) showPreviousPhoto();
+            else showNextPhoto();
+          }}
+        >
+          <span className="photo-carousel__tape" aria-hidden="true" />
+          <div className="photo-carousel__viewport">
+            <div
+              className="photo-carousel__track"
+              style={{ transform: `translateX(-${activePhoto * 100}%)` }}
+            >
+              {carouselPhotos.map((photo, index) => (
+                <figure
+                  className="photo-carousel__slide"
+                  key={photo.src}
+                  aria-hidden={index !== activePhoto}
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    style={{ objectPosition: photo.position }}
+                  />
+                </figure>
+              ))}
+            </div>
           </div>
-          <span className="collage-heart" aria-hidden="true" />
+          <div className="photo-carousel__footer">
+            <button
+              type="button"
+              onClick={showPreviousPhoto}
+              aria-label="Xem ảnh trước"
+            >
+              &#8592;
+            </button>
+            <div className="photo-carousel__dots" aria-label="Chọn ảnh">
+              {carouselPhotos.map((photo, index) => (
+                <button
+                  type="button"
+                  key={photo.src}
+                  className={index === activePhoto ? "is-active" : ""}
+                  onClick={() => setActivePhoto(index)}
+                  aria-label={`Xem ảnh ${index + 1}`}
+                  aria-current={index === activePhoto ? "true" : undefined}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={showNextPhoto}
+              aria-label="Xem ảnh tiếp theo"
+            >
+              &#8594;
+            </button>
+          </div>
+          <span className="photo-carousel__number" aria-hidden="true">
+            {String(activePhoto + 1).padStart(2, "0")} /{" "}
+            {String(carouselPhotos.length).padStart(2, "0")}
+          </span>
         </div>
       </section>
       <section className="paper-section countdown-section">
@@ -622,7 +754,7 @@ function App() {
       <footer data-reveal="up">
         <img
           className="footer-heart"
-          src={asset("assets/heart-childhood-composite-v2.png")}
+          src={asset("assets/footer.png")}
           alt="Ảnh tuổi thơ của Trang và Kiệt trong khung trái tim"
         />
         <a href="#home">Trang &amp; Kiệt</a>
