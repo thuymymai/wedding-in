@@ -724,20 +724,28 @@ function App() {
               className="photo-carousel__track"
               style={{ transform: `translateX(-${activePhoto * 100}%)` }}
             >
-              {carouselPhotos.map((photo, index) => (
-                <figure
-                  className="photo-carousel__slide"
-                  key={photo.src}
-                  aria-hidden={index !== activePhoto}
-                >
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    loading="lazy"
-                    style={{ objectPosition: photo.position }}
-                  />
-                </figure>
-              ))}
+              {carouselPhotos.map((photo, index) => {
+                const distance = Math.abs(index - activePhoto);
+                const isNearby =
+                  distance <= 1 || distance >= carouselPhotos.length - 1;
+
+                return (
+                  <figure
+                    className="photo-carousel__slide"
+                    key={photo.src}
+                    aria-hidden={index !== activePhoto}
+                  >
+                    <img
+                      src={photo.src}
+                      alt={photo.alt}
+                      loading={isNearby ? "eager" : "lazy"}
+                      fetchPriority={index === activePhoto ? "high" : "low"}
+                      decoding="async"
+                      style={{ objectPosition: photo.position }}
+                    />
+                  </figure>
+                );
+              })}
             </div>
           </div>
           <div className="photo-carousel__footer">
