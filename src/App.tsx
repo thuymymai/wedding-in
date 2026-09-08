@@ -354,7 +354,7 @@ function App() {
 
             <img
               className="cover-childhood-collage"
-              src={asset("assets/openingv2.png")}
+              src={asset("assets/openingv4.png")}
               alt="Trang và Kiệt thuở nhỏ trong tranh cưới cùng chú chó"
             />
 
