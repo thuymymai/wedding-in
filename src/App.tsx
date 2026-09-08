@@ -623,12 +623,10 @@ function App() {
         </div>
         {submitted ? (
           <div className="success-card" data-reveal="scale">
-            <span>♥</span>
             <h3>Chúng mình đã nhận được phản hồi!</h3>
-            <p>Cảm ơn bạn. Hẹn gặp nhau trong ngày vui nhé!</p>
-            <button type="button" onClick={() => setSubmitted(false)}>
-              Chỉnh sửa phản hồi
-            </button>
+            <p>
+              Cảm ơn mọi người. <p>Hẹn gặp nhau trong ngày vui nhé!</p>
+            </p>
           </div>
         ) : (
           <form className="rsvp-form" onSubmit={submitRsvp} data-reveal="up">

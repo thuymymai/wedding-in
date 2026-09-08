@@ -368,7 +368,7 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 
 .section-heading { margin: 0 auto 62px; text-align: center; }
 
-.section-heading > p { margin: 18px 0 0; color: var(--muted); font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; }
+.section-heading > p { margin: 18px 0 0; color: var(--muted); font-size: .72rem; letter-spacing: .22em;  }
 
 .section-flourish { display: block; width: 148px; height: 74px; margin: 22px auto -10px; object-fit: contain; opacity: .88; }
 
