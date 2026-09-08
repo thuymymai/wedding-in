@@ -455,6 +455,19 @@ function App() {
               chị em, bạn bè, đồng nghiệp cùng tất cả những người yêu quý dành
               chút thời gian đến chung vui cùng chúng mình trong ngày trọng đại.
             </p>
+
+            <div className="invitation-families" aria-label="Gia đình hai bên">
+              <div className="invitation-family invitation-family--bride">
+                <strong>Quỳnh Trang</strong>
+                <span>Bố Lê Thành</span>
+                <span>Mẹ Thuý Quỳnh</span>
+              </div>
+              <div className="invitation-family invitation-family--groom">
+                <strong>Tuấn Kiệt</strong>
+                <span>Bố Quang Hải</span>
+                <span>Mẹ Phương Mai</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

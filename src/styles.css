@@ -224,9 +224,44 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
   text-align: left;
 }
 
-.invitation-message-copy p:last-child {
+.invitation-message-copy > p:nth-of-type(2) {
   justify-self: stretch;
   text-align: right;
+}
+
+.invitation-families {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 5vw, 64px);
+  width: 100%;
+  margin-top: clamp(22px, 3.5vh, 40px);
+  padding-top: clamp(14px, 2vh, 22px);
+  border-top: 1px solid rgba(141,23,40,.3);
+}
+
+.invitation-family {
+  display: grid;
+  gap: 5px;
+}
+
+.invitation-family--bride { text-align: left; }
+
+.invitation-family--groom { text-align: right; }
+
+.invitation-family strong {
+  color: var(--red);
+  font-family: 'Cormorant Garamond', 'Be Vietnam Pro', serif;
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.invitation-family span {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: clamp(.9rem, 1.5vw, 1rem);
+  font-weight: 400;
+  line-height: 1.55;
+  white-space: nowrap;
 }
 
 .invitation-message-ornament {
@@ -741,6 +776,16 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
     height: 40px;
     margin: 0;
   }
+
+  .invitation-families {
+    gap: 14px;
+    margin-top: clamp(18px, 3vh, 28px);
+    padding-top: 13px;
+  }
+
+  .invitation-family strong { font-size: clamp(1rem, 4.2vw, 1.2rem); }
+
+  .invitation-family span { font-size: clamp(.7rem, 2.6vw, .8rem); }
 
   .scroll-note { bottom: 28px; font-size: .68rem; }
 
