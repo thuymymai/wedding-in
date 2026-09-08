@@ -356,6 +356,10 @@ function App() {
               className="cover-childhood-collage"
               src={asset("assets/openingv4.png")}
               alt="Trang và Kiệt thuở nhỏ trong tranh cưới cùng chú chó"
+              width="1100"
+              height="1100"
+              fetchPriority="high"
+              decoding="async"
             />
 
             <button
@@ -406,7 +410,7 @@ function App() {
           srcSet={`${asset("assets/DSC07406-mobile.jpeg")} 1200w, ${asset("assets/DSC07406.jpeg")} 4000w`}
           sizes="100vw"
           alt="Những khoảnh khắc trong câu chuyện của chúng mình"
-          fetchPriority="high"
+          fetchPriority="low"
         />
         <div className="hero-wash" />
         <div className="hero-copy">
