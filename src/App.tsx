@@ -66,9 +66,54 @@ const carouselPhotos = [
     position: "50% 70%",
   },
   {
+    src: asset("assets/DSC06904.jpeg"),
+    alt: "Trang và Kiệt bên nhau trong bộ ảnh cưới",
+    position: "50% 62%",
+  },
+  {
+    src: asset("assets/DSC06941.jpeg"),
+    alt: "Trang và Kiệt trò chuyện bên khung cửa",
+    position: "50% 68%",
+  },
+  {
+    src: asset("assets/DSC06972.jpeg"),
+    alt: "Kiệt hôn Trang trước khung cửa cổ",
+    position: "50% 64%",
+  },
+  {
+    src: asset("assets/DSC07045.jpeg"),
+    alt: "Một khoảnh khắc dịu dàng của Trang và Kiệt",
+    position: "50% 62%",
+  },
+  {
+    src: asset("assets/DSC07084.jpeg"),
+    alt: "Trang và Kiệt trong bộ ảnh cưới tại Paris",
+    position: "50% 62%",
+  },
+  {
+    src: asset("assets/DSC07112.jpeg"),
+    alt: "Trang và Kiệt cùng nhau trên phố",
+    position: "50% 55%",
+  },
+  {
+    src: asset("assets/DSC06879.jpeg"),
+    alt: "Khoảnh khắc của Trang và Kiệt trong bộ ảnh cưới",
+    position: "50% 60%",
+  },
+  {
     src: asset("assets/DSC07256.jpeg"),
     alt: "Trang và Kiệt bên nhau trong ngày cưới",
     position: "50% 58%",
+  },
+  {
+    src: asset("assets/DSC07296.jpeg"),
+    alt: "Trang và Kiệt lưu giữ khoảnh khắc ngày cưới",
+    position: "50% 62%",
+  },
+  {
+    src: asset("assets/DSC07335.jpeg"),
+    alt: "Trang và Kiệt bên nhau dưới hàng cây ven sông",
+    position: "50% 68%",
   },
   {
     src: asset("assets/DSC07346.jpeg"),
@@ -76,14 +121,9 @@ const carouselPhotos = [
     position: "50% 68%",
   },
   {
-    src: asset("assets/DSC07705.jpeg"),
-    alt: "Trang và Kiệt bên nhau trước khung cửa",
-    position: "50% 60%",
-  },
-  {
-    src: asset("assets/DSC06941.jpeg"),
-    alt: "Kiệt hôn Trang trước khung cửa cổ",
-    position: "50% 64%",
+    src: asset("assets/DSC07360.jpeg"),
+    alt: "Trang và Kiệt trong ánh nắng bên bờ sông",
+    position: "50% 66%",
   },
   {
     src: asset("assets/DSC07371.jpeg"),
@@ -98,6 +138,26 @@ const carouselPhotos = [
   {
     src: asset("assets/DSC07486.jpeg"),
     alt: "Trang và Kiệt nắm tay nhau trong ánh chiều",
+    position: "50% 68%",
+  },
+  {
+    src: asset("assets/DSC07666.jpeg"),
+    alt: "Trang và Kiệt ngồi bên nhau trước biển",
+    position: "50% 70%",
+  },
+  {
+    src: asset("assets/DSC07705.jpeg"),
+    alt: "Trang và Kiệt bên nhau trước khung cửa",
+    position: "50% 60%",
+  },
+  {
+    src: asset("assets/DSC07708.jpeg"),
+    alt: "Trang và Kiệt trong một khoảnh khắc bình yên",
+    position: "50% 62%",
+  },
+  {
+    src: asset("assets/DSC07788.jpeg"),
+    alt: "Trang và Kiệt bên nhau trong ánh chiều bên biển",
     position: "50% 68%",
   },
 ];
@@ -294,7 +354,7 @@ function App() {
 
             <img
               className="cover-childhood-collage"
-              src={asset("assets/opening2.png")}
+              src={asset("assets/openingv2.png")}
               alt="Trang và Kiệt thuở nhỏ trong tranh cưới cùng chú chó"
             />
 
@@ -673,18 +733,12 @@ function App() {
             >
               &#8592;
             </button>
-            <div className="photo-carousel__dots" aria-label="Chọn ảnh">
-              {carouselPhotos.map((photo, index) => (
-                <button
-                  type="button"
-                  key={photo.src}
-                  className={index === activePhoto ? "is-active" : ""}
-                  onClick={() => setActivePhoto(index)}
-                  aria-label={`Xem ảnh ${index + 1}`}
-                  aria-current={index === activePhoto ? "true" : undefined}
-                />
-              ))}
-            </div>
+            <img
+              className="photo-carousel__heart"
+              src={asset("assets/heart-transparent.png")}
+              alt=""
+              aria-hidden="true"
+            />
             <button
               type="button"
               onClick={showNextPhoto}
@@ -754,7 +808,7 @@ function App() {
       <footer data-reveal="up">
         <img
           className="footer-heart"
-          src={asset("assets/footer.png")}
+          src={asset("assets/footerv2.png")}
           alt="Ảnh tuổi thơ của Trang và Kiệt trong khung trái tim"
         />
         <a href="#home">Trang &amp; Kiệt</a>

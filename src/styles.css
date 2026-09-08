@@ -68,7 +68,7 @@ a { color: inherit; }
 
 .cover-signature img { display: block; width: 100%; height: auto; }
 
-.cover-childhood-collage { display: block; width: min(92vw, 520px); height: clamp(285px, 48vh, 440px); object-fit: contain; filter: drop-shadow(0 12px 20px rgba(57,49,35,.1)); }
+.cover-childhood-collage { display: block; width: min(100vw, 620px); height: clamp(390px, 64vh, 600px); object-fit: contain; filter: drop-shadow(0 12px 20px rgba(57,49,35,.1)); transform: scale(1.28); transform-origin: center; will-change: transform; }
 
 .invitation-cover:not(.is-open) .cover-childhood-collage { animation: cover-collage-arrive 1.25s .2s cubic-bezier(.2,.75,.2,1) both; }
 
@@ -509,11 +509,7 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 
 .photo-carousel__footer button:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 
-.photo-carousel__dots { display: flex; align-items: center; justify-content: center; gap: 9px; }
-
-.photo-carousel__dots button { width: 7px; height: 7px; padding: 0; border: 1px solid var(--red); border-radius: 50%; background: transparent; cursor: pointer; transition: background-color .2s ease, transform .2s ease; }
-
-.photo-carousel__dots button.is-active { background: var(--red); transform: scale(1.35); }
+.photo-carousel__heart { display: block; justify-self: center; width: 46px; height: 34px; object-fit: contain; transform: rotate(-3deg); }
 
 .photo-carousel__number { position: absolute; top: 23px; right: 27px; z-index: 2; padding: 4px 7px; background: rgba(247,240,229,.84); color: var(--olive-dark); font-family: 'Cormorant Garamond', serif; font-size: .72rem; font-weight: 600; letter-spacing: .12em; }
 
@@ -604,7 +600,7 @@ h1 i { display: inline-block; margin: 0 .04em; color: var(--red); font-family: '
 
 footer { display: grid; justify-items: center; gap: 8px; padding: 55px 20px; background-color: var(--paper); background-image: var(--paper-texture); background-repeat: repeat; background-size: 720px auto; text-align: center; }
 
-.footer-heart { display: block; width: clamp(130px, 16vw, 190px); height: auto; margin: -12px auto 8px; object-fit: contain; }
+.footer-heart { display: block; width: clamp(170px, 20vw, 250px); height: auto; margin: -12px auto 8px; object-fit: contain; transform: scale(1.6); transform-origin: center; }
 
 footer a { font-family: 'Cormorant Garamond', 'Be Vietnam Pro', serif; font-size: 2rem; font-weight: 500; text-decoration: none; }
 
@@ -643,8 +639,8 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
 }
 
 @keyframes cover-collage-arrive {
-  from { opacity: 0; transform: translateY(-24px) scale(.94) rotate(-1deg); }
-  to { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+  from { opacity: 0; transform: translateY(-24px) scale(1.18) rotate(-1deg); }
+  to { opacity: 1; transform: translateY(0) scale(1.28) rotate(0); }
 }
 
 @keyframes hero-focus {
@@ -694,7 +690,7 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
 
   .cover-signature { width: 138px; }
 
-  .cover-childhood-collage { width: min(96vw, 430px); height: clamp(280px, 43vh, 390px); }
+  .cover-childhood-collage { width: min(100vw, 470px); height: clamp(320px, 49vh, 450px); }
 
   .mini-nav { top: max(10px, env(safe-area-inset-top)); left: 12px; right: 12px; width: auto; transform: none; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, .8fr) minmax(0, .7fr); gap: 2px; padding: 4px; }
 
@@ -920,7 +916,7 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
 
   footer { padding: 30px 20px 40px; }
 
-  .footer-heart { width: 110px; }
+  .footer-heart { width: 150px; }
 
   footer a { font-size: 1.7rem; }
 
@@ -970,7 +966,7 @@ footer p { margin: 14px 0 0; color: var(--muted); font-family: 'Dancing Script',
 
   .cover-signature { width: 120px; }
 
-  .cover-childhood-collage { width: min(90vw, 360px); height: 260px; }
+  .cover-childhood-collage { width: min(94vw, 400px); height: 290px; }
 
   .hero { min-height: 700px; padding-top: 105px; }
 
